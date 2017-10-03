@@ -199,6 +199,9 @@ void button_tick(void)
         }
         else
         {
+            if (button->count > button->debounce)
+                button->count = button->debounce;
+
             if (button->count > 0)
                 button->count--;
             else
@@ -208,7 +211,6 @@ void button_tick(void)
         // pressed event
         if (button->state & !button->pressed)
         {
-            button->state = 1;
             button->pressed = 1;
             button->pressed_event = 1;
             button->released = 0;
@@ -217,7 +219,6 @@ void button_tick(void)
         // released event
         if (!button->state & !button->released)
         {
-            button->state = 0;
             button->released = 1;
             button->released_event = 1;
             button->pressed = 0;
@@ -235,7 +236,6 @@ void button_tick(void)
             {
                 button->held = 1;
                 button->held_event = 1;
-                button->count = button->debounce;
             }
         }
     }
