@@ -38,7 +38,8 @@
 ****************************************************************************************************
 */
 
-#define BUTTON_READ(b)      (BUTTON_GPIO_GET(b->pin[0], b->pin[1]) ^ BUTTON_RELEASED_VALUE)
+#define RELEASED_VALUE      (1 - BUTTON_PRESSED_VALUE)
+#define BUTTON_READ(b)      (BUTTON_GPIO_GET(b->pin[0], b->pin[1]) ^ RELEASED_VALUE)
 
 
 /*

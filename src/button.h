@@ -64,9 +64,8 @@ extern "C"
 // maximum of button instances
 #define BUTTON_MAX_INSTANCES        2
 
-// configure the logic value read when the button is released (must be 0 or 1)
-// if you have a pull-up on this pin use 1, otherside (pull-down case) use 0
-#define BUTTON_RELEASED_VALUE       1
+// configure the logic value read when the button is pressed (must be 0 or 1)
+#define BUTTON_PRESSED_VALUE        0
 
 // tick period in us
 #define BUTTON_TICK_PERIOD          1000
@@ -184,8 +183,8 @@ void button_tick(void);
 #error "BUTTON_GPIO_GET macro must defined"
 #endif
 
-#if BUTTON_RELEASED_VALUE < 0 || BUTTON_RELEASED_VALUE > 1
-#error "BUTTON_RELEASED_VALUE must be set to 0 or 1"
+#if BUTTON_PRESSED_VALUE < 0 || BUTTON_PRESSED_VALUE > 1
+#error "BUTTON_PRESSED_VALUE must be set to 0 or 1"
 #endif
 
 #if BUTTON_TICK_PERIOD < 1000 || BUTTON_TICK_PERIOD > 100000
