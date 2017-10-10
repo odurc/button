@@ -64,12 +64,10 @@ struct button_t {
         struct {
             uint8_t pressed_event:1;
             uint8_t released_event:1;
-            uint8_t clicked_event:1;
             uint8_t held_event:1;
 
             uint8_t pressed:1;
             uint8_t released:1;
-            uint8_t clicked:1;
             uint8_t held:1;
         };
     };

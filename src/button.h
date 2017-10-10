@@ -91,8 +91,7 @@ typedef struct button_t button_t;
 typedef enum button_event_t {
     BUTTON_PRESSED  = 0x01,
     BUTTON_RELEASED = 0x02,
-    BUTTON_CLICKED  = 0x04,
-    BUTTON_HELD     = 0x08,
+    BUTTON_HELD     = 0x04,
 } button_event_t;
 
 
