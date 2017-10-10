@@ -34,10 +34,6 @@ int main(void)
         {
             printw("--> button released\n");
         }
-        else if (button_status(button, BUTTON_CLICKED))
-        {
-            printw("--> button clicked\n");
-        }
         else if (button_status(button, BUTTON_HELD))
         {
             printw("--> button held\n");
