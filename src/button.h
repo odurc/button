@@ -49,7 +49,7 @@ extern "C"
 ****************************************************************************************************
 */
 
-#define BUTTON_VERSION      "0.0.0"
+#define BUTTON_VERSION      "1.0.0"
 
 
 /*
@@ -151,6 +151,17 @@ int button_status(button_t *button, button_event_t event);
  * @param[in] time_ms the time in milliseconds
  */
 void button_hold_time(button_t *button, uint16_t time_ms);
+
+/**
+ * Set a callback function for the events
+ *
+ * All events raise the same callback function. The status must be read inside of
+ * the callback using the button_status function.
+ *
+ * @param[in] button button object pointer
+ * @param[in] callback the callback function pointer
+ */
+void button_event_callback(button_t *button, void (*callback)(button_t *button));
 
 /**
  * Destroy button_t object

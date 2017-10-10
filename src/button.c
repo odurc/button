@@ -72,6 +72,8 @@ struct button_t {
             uint8_t held:1;
         };
     };
+
+    void (*callback)(button_t *button);
 };
 
 
@@ -145,6 +147,7 @@ button_t* button_create(const int *pin, uint8_t debounce_ms)
     button->debounce = 1000 * debounce_ms / BUTTON_TICK_PERIOD;
     button->hold_time = 0;
     button->released = 1;
+    button->callback = 0;
 
     return button;
 }
@@ -174,6 +177,11 @@ inline void button_hold_time(button_t *button, uint16_t time_ms)
     button->hold_time = time_ms;
 }
 
+inline void button_event_callback(button_t *button, void (*callback)(button_t *button))
+{
+    button->callback = callback;
+}
+
 void button_tick(void)
 {
     for (int i = 0; i < BUTTON_MAX_INSTANCES; i++)
@@ -183,6 +191,8 @@ void button_tick(void)
         // skip button if not in use
         if (button->pin == 0)
             continue;
+
+        int callback = 0;
 
         // read button
         int button_on = BUTTON_READ(button);
@@ -213,6 +223,7 @@ void button_tick(void)
             button->pressed = 1;
             button->pressed_event = 1;
             button->released = 0;
+            callback = 1;
         }
 
         // released event
@@ -222,6 +233,7 @@ void button_tick(void)
             button->released_event = 1;
             button->pressed = 0;
             button->held = 0;
+            callback = 1;
         }
 
         // hold event
@@ -235,7 +247,12 @@ void button_tick(void)
             {
                 button->held = 1;
                 button->held_event = 1;
+                callback = 1;
             }
         }
+
+        // check if callback is required
+        if (callback && button->callback)
+            button->callback(button);
     }
 }
