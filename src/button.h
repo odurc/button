@@ -137,7 +137,7 @@ int button_read(button_t *button);
  * @param[in] button button object pointer
  * @param[in] event button object pointer
  *
- * @return non zero value if button is active or zero otherwise
+ * @return non zero value if event is true or zero otherwise
  */
 int button_status(button_t *button, button_event_t event);
 
